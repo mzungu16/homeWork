@@ -19,18 +19,19 @@ import java.util.Arrays;
 public class Lesson2 {
     public static void main(String[] args) {
         System.out.println("Выполнение 1-го задания");
-        replacingArrayValues();
+        replacingArrayValues(); //метод для выполнения 1-го задания
         System.out.println("Выполнение 2-го задания");
-        fillArrayWithValues();
+        fillArrayWithValues(); //метод для выполнения 2-го задания
         System.out.println("Выполнение 3-го задания");
-        loopThroughAndMultiply();
+        loopThroughAndMultiply(); //метод для выполнения 3-го задания
         System.out.println("Выполнение 4-го задания");
-        minAndMaxElementsInArray();
+        minAndMaxElementsInArray(); //метод для выполнения 4-го задания
         System.out.println("Выполнение 5-го задания");
-        int [] arrayToCheck = {2, 2, 2, 1, 2, 2, 10, 1};
-        checkBalance(arrayToCheck);
+        int[] arrayToCheck = {2, 2, 2, 1, 2, 2, 10, 1};
+        checkBalance(arrayToCheck); //метод для выполнения 5-го задания
     }
 
+    //метод, который выводит в консоль массив с измененными значениями(1->0;0->1)
     static void replacingArrayValues() {
         int[] intArrayForReplace = {1, 1, 0, 0, 1, 0};
         System.out.println(Arrays.toString(intArrayForReplace));
@@ -43,18 +44,17 @@ public class Lesson2 {
         System.out.println(Arrays.toString(intArrayForReplace));
     }
 
+    //метод, который выводит в консоль, массив, заполненный значениями в цикле с определенной закономерностью
     static void fillArrayWithValues() {
-        // int c = 0;
         int[] intArrayForFill = new int[8];
         System.out.println(Arrays.toString(intArrayForFill));
         for (int i = 1; i < intArrayForFill.length; i++) {
-            /*c+=3;
-            intArrayForFill[i] = c;*/
             intArrayForFill[i] = intArrayForFill[i - 1] + 3;
         }
         System.out.println(Arrays.toString(intArrayForFill));
     }
 
+    //метод, который проверят все элементы массива(<6) если да то умножает данный элемент на два, после чего выводит в консоль измененный массив
     static void loopThroughAndMultiply() {
         int[] intArrayForLoop = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
         System.out.println(Arrays.toString(intArrayForLoop));
@@ -64,6 +64,7 @@ public class Lesson2 {
         System.out.println(Arrays.toString(intArrayForLoop));
     }
 
+    //метод, который находит в массиве среди всех элементов самый максимальный и минимальный, после чего выводит их в консоль
     static void minAndMaxElementsInArray() {
         int[] intArrayMinMax = {1, 5, 55, 2, 55, 12};
         int max = intArrayMinMax[0];
@@ -76,8 +77,9 @@ public class Lesson2 {
         System.out.println("Max element - " + max + " Min element - " + min);
     }
 
-    static boolean checkBalance (int[] arrayToCheck){
-        for (int i = 0;i<arrayToCheck.length;i++){
+    //метод, который принимает на вход целочисленный массив, после чего проверяет возвращает true, если в массиве есть место, в котором сумма левой и правой части массива равны.
+    static boolean checkBalance(int[] arrayToCheck) {
+        for (int i = 0; i < arrayToCheck.length; i++) {
 
         }
         return false;
