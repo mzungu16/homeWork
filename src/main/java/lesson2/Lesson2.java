@@ -78,7 +78,7 @@ public class Lesson2 {
 
     static boolean checkBalance (int[] arrayToCheck){
         for (int i = 0;i<arrayToCheck.length;i++){
-            
+
         }
         return false;
     }
