@@ -27,8 +27,8 @@ public class Lesson2 {
         System.out.println("Выполнение 4-го задания");
         minAndMaxElementsInArray(); //метод для выполнения 4-го задания
         System.out.println("Выполнение 5-го задания");
-        int[] arrayToCheck = {2, 2, 2, 1, 2, 2, 10, 1};
-        checkBalance(arrayToCheck); //метод для выполнения 5-го задания
+        int[] arrayToCheck = {2, 2, 2, 1, 2, 3, 10, 2};
+        System.out.println(checkBalance(arrayToCheck)); //метод для выполнения 5-го задания
     }
 
     //метод, который выводит в консоль массив с измененными значениями(1->0;0->1)
@@ -79,9 +79,21 @@ public class Lesson2 {
 
     //метод, который принимает на вход целочисленный массив, после чего проверяет возвращает true, если в массиве есть место, в котором сумма левой и правой части массива равны.
     static boolean checkBalance(int[] arrayToCheck) {
-        for (int i = 0; i < arrayToCheck.length; i++) {
-
+        int sumRight = 0;
+        int sumLeft = 0;
+        boolean result = false;
+        for (int i = 0; i < arrayToCheck.length; i++) {     //первый цикл, который ищет сумму слева
+            if (result == true) break;
+            sumLeft += arrayToCheck[i];     //каждую итеррацию, если мы не нашли баланс мы увеличиваем сумму на следующее значение массива с начала
+            sumRight = 0;   //перед новым заходом во второй цикл мы обнуляем правую сумму
+            for (int j = arrayToCheck.length - 1; j > i; j--) {     //второй цикл ищет и сравнивает внутри себя правую и левую суммы. Пример:[2, 2, 2, 1, 2, 2, || 10, 2]
+                sumRight += arrayToCheck[j];    //каждую итерацию, если мы не нашли баланс мы увеличиваем сумму на следующее значение массива только с обратной стороны
+                    if (sumRight == sumLeft) { //если сумма справа равна сумме слева, то мы выходим из второго цикла, после и из первого, при этом присваивая переменной result значение true
+                    result = true;
+                    break;
+                }
+            }
         }
-        return false;
+        return result;//возвращаем методу значение баланася true - есть fasle - нет
     }
 }
