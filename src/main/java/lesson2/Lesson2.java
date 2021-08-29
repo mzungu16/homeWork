@@ -10,11 +10,13 @@ package lesson2;
 граница показана символами ||эти символы в массив не входят.
 6. **** Написать метод, которому на вход подается одномерный массив и число n (может быть положительным, или отрицательным),
 при этом метод должен сместить все элементы массива на n позиций. Элементы смещаются циклично.
-Для усложнения задачи нельзя пользоваться вспомогательными массивами. Примеры: [ 1, 2, 3 ] при n = 1 (на один вправо) -> [ 3, 1, 2 ]; [ 3, 5, 6, 1]
-при n = -2 (на два влево) -> [ 6, 1, 3, 5 ]. При каком n в какую сторону сдвиг можете выбирать сами.
+Для усложнения задачи нельзя пользоваться вспомогательными массивами. Примеры: [ 1, 2, 3 ] при n = 1 (на один вправо) -> [ 3, 1, 2 ];
+[ 3, 5, 6, 1]при n = -2 (на два влево) -> [ 6, 1, 3, 5 ]. При каком n в какую сторону сдвиг можете выбирать сами.
 */
 
 import java.util.Arrays;
+
+import static java.lang.Math.abs;
 
 public class Lesson2 {
     public static void main(String[] args) {
@@ -29,6 +31,10 @@ public class Lesson2 {
         System.out.println("Выполнение 5-го задания");
         int[] arrayToCheck = {2, 2, 2, 1, 2, 3, 10, 2};
         System.out.println(checkBalance(arrayToCheck)); //метод для выполнения 5-го задания
+        int n = -1;
+        int[] arrayToMove = {3, 5, 6, 1}; //{6,1,3,5} , если на 3 то {5,6,1,3} суть в том, что пололжение идекс карйнего элемента в начальном массиве будет на 1 меньше
+        System.out.println("n = " + n + " " + Arrays.toString(arrayToMove));
+        moveArray(arrayToMove, n); //метод для выполнения 6-го задания
     }
 
     //метод, который выводит в консоль массив с измененными значениями(1->0;0->1)
@@ -88,12 +94,46 @@ public class Lesson2 {
             sumRight = 0;   //перед новым заходом во второй цикл мы обнуляем правую сумму
             for (int j = arrayToCheck.length - 1; j > i; j--) {     //второй цикл ищет и сравнивает внутри себя правую и левую суммы. Пример:[2, 2, 2, 1, 2, 2, || 10, 2]
                 sumRight += arrayToCheck[j];    //каждую итерацию, если мы не нашли баланс мы увеличиваем сумму на следующее значение массива только с обратной стороны
-                    if (sumRight == sumLeft) { //если сумма справа равна сумме слева, то мы выходим из второго цикла, после и из первого, при этом присваивая переменной result значение true
+                if (sumRight == sumLeft) { //если сумма справа равна сумме слева, то мы выходим из второго цикла, после и из первого, при этом присваивая переменной result значение true
                     result = true;
                     break;
                 }
             }
         }
-        return result;//возвращаем методу значение баланася true - есть fasle - нет
+        return result;//возвращаем значение баланса true - есть, false - нет
+    }
+
+    static void moveArray(int[] arrayToMove, int n) {
+        int[] newArrayToFill = new int[arrayToMove.length];
+        int j = arrayToMove.length - n;
+        if (n > 0) {
+           /* while (true) {
+                newArrayToFill[i] = arrayToMove[j];
+                i++;
+                j++;
+                if (j == 4) j = 0;
+                if (i == arrayToMove.length) break;
+            }*/
+            for (int i = 0; i < arrayToMove.length; i++) {
+                newArrayToFill[i] = arrayToMove[j];
+                j++;
+                if (j == 4) j = 0;
+            }
+        } else {
+            j = abs(n);
+            /*while (true) {
+                newArrayToFill[i] = arrayToMove[j];
+                i++;
+                j++;
+                if (j == 4) j = 0;
+                if (i == 4) break;
+            }*/
+            for (int i = 0; i < arrayToMove.length; i++) {
+                newArrayToFill[i] = arrayToMove[j];
+                j++;
+                if (j == 4) j = 0;
+            }
+        }
+        System.out.println(Arrays.toString(newArrayToFill));
     }
 }
