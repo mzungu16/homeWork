@@ -11,7 +11,7 @@ package lesson2;
 6. **** Написать метод, которому на вход подается одномерный массив и число n (может быть положительным, или отрицательным),
 при этом метод должен сместить все элементы массива на n позиций. Элементы смещаются циклично.
 Для усложнения задачи нельзя пользоваться вспомогательными массивами. Примеры: [ 1, 2, 3 ] при n = 1 (на один вправо) -> [ 3, 1, 2 ];
-[ 3, 5, 6, 1]при n = -2 (на два влево) -> [ 6, 1, 3, 5 ]. При каком n в какую сторону сдвиг можете выбирать сами.
+[ 3, 5, 6, 1]при n = -2 (на два влево) -> [ 6, 1, 3, 5 ]. При каком n в какую сторону сдвиг, можете выбирать сами.
 */
 
 import java.util.Arrays;
@@ -31,8 +31,8 @@ public class Lesson2 {
         System.out.println("Выполнение 5-го задания");
         int[] arrayToCheck = {2, 2, 2, 1, 2, 3, 10, 2};
         System.out.println(checkBalance(arrayToCheck)); //метод для выполнения 5-го задания
-        int n = -1;
-        int[] arrayToMove = {3, 5, 6, 1}; //{6,1,3,5} , если на 3 то {5,6,1,3} суть в том, что пололжение идекс карйнего элемента в начальном массиве будет на 1 меньше
+        int n = -2;
+        int[] arrayToMove = {1, 8, 9, 5, 6};
         System.out.println("n = " + n + " " + Arrays.toString(arrayToMove));
         moveArray(arrayToMove, n); //метод для выполнения 6-го задания
     }
@@ -83,7 +83,7 @@ public class Lesson2 {
         System.out.println("Max element - " + max + " Min element - " + min);
     }
 
-    //метод, который принимает на вход целочисленный массив, после чего проверяет возвращает true, если в массиве есть место, в котором сумма левой и правой части массива равны.
+    //метод, который принимает на вход целочисленный массив, после чего проверяет и возвращает true, если в массиве есть место, в котором сумма левой и правой части массива равны.
     static boolean checkBalance(int[] arrayToCheck) {
         int sumRight = 0;
         int sumLeft = 0;
@@ -103,35 +103,22 @@ public class Lesson2 {
         return result;//возвращаем значение баланса true - есть, false - нет
     }
 
+    //метод, который принимает массив и шаг, на который необходимо сместить массив, возвращает новый массив со смещенными значениями
     static void moveArray(int[] arrayToMove, int n) {
         int[] newArrayToFill = new int[arrayToMove.length];
         int j = arrayToMove.length - n;
         if (n > 0) {
-           /* while (true) {
-                newArrayToFill[i] = arrayToMove[j];
-                i++;
-                j++;
-                if (j == 4) j = 0;
-                if (i == arrayToMove.length) break;
-            }*/
             for (int i = 0; i < arrayToMove.length; i++) {
                 newArrayToFill[i] = arrayToMove[j];
                 j++;
-                if (j == 4) j = 0;
+                if (j == arrayToMove.length) j = 0;
             }
         } else {
             j = abs(n);
-            /*while (true) {
-                newArrayToFill[i] = arrayToMove[j];
-                i++;
-                j++;
-                if (j == 4) j = 0;
-                if (i == 4) break;
-            }*/
             for (int i = 0; i < arrayToMove.length; i++) {
                 newArrayToFill[i] = arrayToMove[j];
                 j++;
-                if (j == 4) j = 0;
+                if (j == arrayToMove.length) j = 0;
             }
         }
         System.out.println(Arrays.toString(newArrayToFill));
