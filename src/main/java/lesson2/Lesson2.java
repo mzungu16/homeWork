@@ -15,11 +15,13 @@ package lesson2;
 */
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 import static java.lang.Math.abs;
 
 public class Lesson2 {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Выполнение 1-го задания");
         replacingArrayValues(); //метод для выполнения 1-го задания
         System.out.println("Выполнение 2-го задания");
@@ -29,11 +31,21 @@ public class Lesson2 {
         System.out.println("Выполнение 4-го задания");
         minAndMaxElementsInArray(); //метод для выполнения 4-го задания
         System.out.println("Выполнение 5-го задания");
-        int[] arrayToCheck = {2, 2, 2, 1, 2, 3, 10, 2};
+        int[] arrayToCheck = {2, 6, 2, 2, 2, 10, 4};
         System.out.println(checkBalance(arrayToCheck)); //метод для выполнения 5-го задания
-        int n = -2;
-        int[] arrayToMove = {1, 8, 9, 5, 6};
-        System.out.println("n = " + n + " " + Arrays.toString(arrayToMove));
+        double[] arrayToMove = {3, 9, 6, 2, 7};
+        int n, sizeOfArray = arrayToMove.length - 1;
+        while (true) { //цикл для проверки введенного числа n
+            System.out.println("Введите число n");
+            n = scanner.nextInt();
+            if (abs(n) > sizeOfArray || n == 0) {
+                System.out.println("Введите n от -" + sizeOfArray + " до " + sizeOfArray);
+            } else {
+                break;
+            }
+        }
+        System.out.println("n = " + n);
+        System.out.println(Arrays.toString(arrayToMove));
         moveArray(arrayToMove, n); //метод для выполнения 6-го задания
     }
 
@@ -90,7 +102,7 @@ public class Lesson2 {
         boolean result = false;
         for (int i = 0; i < arrayToCheck.length; i++) {     //первый цикл, который ищет сумму слева
             if (result == true) break;
-            sumLeft += arrayToCheck[i];     //каждую итеррацию, если мы не нашли баланс мы увеличиваем сумму на следующее значение массива с начала
+            sumLeft += arrayToCheck[i];     //каждую итерацию, если мы не нашли баланс мы увеличиваем сумму на следующее значение массива с начала
             sumRight = 0;   //перед новым заходом во второй цикл мы обнуляем правую сумму
             for (int j = arrayToCheck.length - 1; j > i; j--) {     //второй цикл ищет и сравнивает внутри себя правую и левую суммы. Пример:[2, 2, 2, 1, 2, 2, || 10, 2]
                 sumRight += arrayToCheck[j];    //каждую итерацию, если мы не нашли баланс мы увеличиваем сумму на следующее значение массива только с обратной стороны
@@ -104,8 +116,9 @@ public class Lesson2 {
     }
 
     //метод, который принимает массив и шаг, на который необходимо сместить массив, возвращает новый массив со смещенными значениями
-    static void moveArray(int[] arrayToMove, int n) {
-        int[] newArrayToFill = new int[arrayToMove.length];
+    static void moveArray(double[] arrayToMove, int n) {
+        //Вариант с доп массивом
+       /* int[] newArrayToFill = new int[arrayToMove.length];
         int j = arrayToMove.length - n;
         if (n > 0) {
             for (int i = 0; i < arrayToMove.length; i++) {
@@ -120,7 +133,55 @@ public class Lesson2 {
                 j++;
                 if (j == arrayToMove.length) j = 0;
             }
+        }*/
+        //Вариант с текущим массивом, основная идея заключалась в том, чтобы использовать десятичные числа а точку как разделитель
+        double buf;
+        int j = arrayToMove.length - n; // инициализирована переменная j, которая определяет индекс элемента, который должен находится на первом места
+        if (n > 0) { //проверка в какую сторону мы смещаемся n > 0 по часовой n < 0 против
+            for (int i = 0; i < arrayToMove.length; i++) {
+                buf = arrayToMove[i]; // буферна переменная для хранения числа
+                if (arrayToMove[i] % 1 != 0) { //если элемент массива десятичное число с не нулевым значением после запятой, то мы не очищаем его, а присваиваем десятичное значение при этом переведя его в целую часть иначе очищаем
+                    arrayToMove[i] = (double) Math.round((arrayToMove[i] % 1) * 10);
+                } else {
+                    arrayToMove[i] = 0;
+                }
+                if (i == j) { //далее сравниваем, нашли ли мы индекс элемента который должен быть на первом месте
+                    if (buf % 1 != 0) {
+                        buf = buf - (buf % 1);//если оно дробное то нас интересует только целая часть
+                    }
+                    arrayToMove[abs(arrayToMove.length - (i + n))] = buf;
+                    j++;
+                } else {// иначе мы данный элемент сдвигаем в место где он должен находится после сдвига
+                    if (buf % 1 != 0) {
+                        buf = buf - (buf % 1);
+                    }
+                    arrayToMove[abs(((arrayToMove.length - j) + i))] += buf / 10;
+                }
+            }
+        } else {//если значение n<0
+            j = abs(n); // индекс элемента, который должен находится в начале массива
+            int step = j;
+            for (int i = 0; i < arrayToMove.length; i++) {
+                buf = arrayToMove[i];// буферна переменная для хранения числа
+                if (arrayToMove[i] % 1 != 0) {//если элемент массива десятичное число с не нулевым значением после запятой, то мы не очищаем его, а присваиваем десятичное значение при этом переведя его в целую часть иначе очищаем
+                    arrayToMove[i] = (double) Math.round((arrayToMove[i] % 1) * 10);
+                } else {
+                    arrayToMove[i] = 0;
+                }
+                if (i == j) {//далее сравниваем, нашли ли мы индекс элемента который должен быть на первом месте
+                    if (buf % 1 != 0) {
+                        buf = buf - (buf % 1);//если оно дробное то нас интересует только целая часть
+                    }
+                    arrayToMove[abs(i - step)] = buf;
+                    j++;
+                } else {
+                    if (buf % 1 != 0) {
+                        buf = buf - (buf % 1);
+                    }
+                    arrayToMove[abs(((arrayToMove.length - j) + i))] += buf / 10;
+                }
+            }
         }
-        System.out.println(Arrays.toString(newArrayToFill));
+        System.out.println(Arrays.toString(arrayToMove));
     }
 }
