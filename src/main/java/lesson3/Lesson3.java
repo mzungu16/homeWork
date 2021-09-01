@@ -18,12 +18,12 @@ import java.util.Scanner;
 
 public class Lesson3 {
     public static void main(String[] args) {
-        fillArray();//метод для выполнения 1 задания.
+        fillArray();//метод для выполнения 1 задания
         System.out.println("Угадайте число от 0 - 9");
-        findNumber();
+        findNumber();//метод для выполнения 2 задания
     }
 
-    //метод, заполняет диагональные элементы квадратного единицами
+    //метод, заполняет диагональные элементы квадратного массива единицами
     static void fillArray() {
         int[][] arrayToFill = new int[3][3];
         for (int i = 0; i < arrayToFill.length; i++) {
@@ -40,33 +40,28 @@ public class Lesson3 {
     static void findNumber() {
         Random random = new Random();
         int numberToFind = random.nextInt(9);
-
+       // System.out.println(numberToFind);
         Scanner scanner = new Scanner(System.in);
-
         int inputNumber, i = 3;
-
-        while (true) {
-            if (i != 0) {
-                System.out.println("Попыток - " + i);
-                inputNumber = scanner.nextInt();
-                if (inputNumber > numberToFind) {
-                    System.out.println("Введенное число больше загаданного");
-                    i--;
-                } else if (inputNumber < numberToFind) {
-                    System.out.println("Веденное число меньше загаданного");
-                    i--;
-                } else {
-                    System.out.println("Вы угадали");
-                    break;
-                }
+        while (i != 0) {
+            System.out.println("Попыток - " + i);
+            inputNumber = scanner.nextInt();
+            if (inputNumber > numberToFind) {
+                System.out.println("Введенное число больше загаданного");
+                i--;
+            } else if (inputNumber < numberToFind) {
+                System.out.println("Веденное число меньше загаданного");
+                i--;
             } else {
+                System.out.println("Вы угадали");
+                break;
+            }
+            if (i == 0) {
                 System.out.println("Вы проиграли (");
                 System.out.println("Хотите попробовать еще раз? 1-да 0-нет");
                 int yesOrNot = scanner.nextInt();
                 if (yesOrNot == 1) {
                     i = 3;
-                } else {
-                    break;
                 }
             }
         }
