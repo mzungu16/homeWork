@@ -86,7 +86,7 @@ public class Lesson2 {
     static void minAndMaxElementsInArray() {
         int[] intArrayMinMax = {1, 5, 55, 2, 55, 12};
         int max = intArrayMinMax[0];
-        int min = intArrayMinMax[2];
+        int min = intArrayMinMax[0];
         System.out.println(Arrays.toString(intArrayMinMax));
         for (int i = 0; i < intArrayMinMax.length; i++) {
             if (intArrayMinMax[i] > max) max = intArrayMinMax[i];
