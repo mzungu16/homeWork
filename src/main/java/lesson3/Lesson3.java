@@ -26,13 +26,13 @@ public class Lesson3 {
 
     //метод, заполняет диагональные элементы квадратной матрицы единицами
     static void fillArray() {
-        int[][] arrayToFill = new int[3][3];
+        int[][] arrayToFill = new int[5][5];
         for (int i = 0; i < arrayToFill.length; i++) {
             for (int j = 0; j < arrayToFill.length; j++) {
                 if (i == j) {
                     arrayToFill[i][j] = 1;
                 }
-                System.out.print(arrayToFill[i][j]);
+                System.out.print(arrayToFill[i][j] + " ");
             }
             System.out.println();
         }
