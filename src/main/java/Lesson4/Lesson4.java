@@ -21,11 +21,13 @@ public class Lesson4 {
     private static int fieldSizeX;
     private static int fieldSizeY;
     private static int figures;
+    private static int checkCounterHuman;
+    private static int checkCounterAi;
 
     public static void main(String[] args) {
         initField();
         printField();
-        while (!checkWin(field)) {
+        while (!checkWin()) {
             humanTurn();
             aiTurn();
             printField();
@@ -80,38 +82,108 @@ public class Lesson4 {
         field[aiValueY][aiValueX] = O_POINT;
     }
 
-    private static boolean checkWin(char[][] fieldToCheck) {
-        int checkCounterHuman = 0;
-        int checkCounterAI = 0;
+    private static boolean checkWin() {
+        // проверка по строкам
+        if (checkStrings()) return true;
+        // проверка по столбцам
+        if (checkColumns()) return true;
+        // проверка по диагонали начиная с 0:0
+        if (checkFirstDiagonal()) return true;
+        // проверка по противоположной диагонали
+        if (checkLastDiagonal()) return true;
+        // проверка на ничью
+        if (isHoleFieldEmpty() && checkCounterHuman == 0 && checkCounterAi == 0) return true;
+        return false;
+    }
+
+    private static boolean checkLastDiagonal() {
+        if (checkCounterHuman != 0 || checkCounterAi != 0) {
+            checkCounterHuman = 0;
+            checkCounterAi = 0;
+        }
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
-                if (fieldToCheck[y][x] == X_POINT) checkCounterHuman++;
-                else if (fieldToCheck[y][x] == O_POINT) checkCounterAI++;
+                if ((y + x) == field.length - 1) {
+                    if (field[y][x] == X_POINT) checkCounterHuman++;
+                    else if (field[y][x] == O_POINT) checkCounterAi++;
+                    if (checkCounterHuman == figures) {
+                        System.out.println("You wins");
+                        return true;
+                    } else if (checkCounterAi == figures) {
+                        System.out.println("Ai wins");
+                        return true;
+                    }
+                }
             }
-            if (checkCounterHuman == figures) {
-                System.out.println("You wins");
-                return true;
-            } else if (checkCounterAI == figures) {
-                System.out.println("Ai wins");
-                return true;
-            }
+        }
+        return false;
+    }
+
+    private static boolean checkFirstDiagonal() {
+        if (checkCounterHuman != 0 || checkCounterAi != 0) {
             checkCounterHuman = 0;
-            checkCounterAI = 0;
+            checkCounterAi = 0;
+        }
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (y == x) {
+                    if (field[y][x] == X_POINT) checkCounterHuman++;
+                    else if (field[y][x] == O_POINT) checkCounterAi++;
+                    if (checkCounterHuman == figures) {
+                        System.out.println("You wins");
+                        return true;
+                    } else if (checkCounterAi == figures) {
+                        System.out.println("Ai wins");
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean checkColumns() {
+        if (checkCounterHuman != 0 || checkCounterAi != 0) {
+            checkCounterHuman = 0;
+            checkCounterAi = 0;
         }
         for (int x = 0; x < fieldSizeX; x++) {
             for (int y = 0; y < fieldSizeY; y++) {
-                if (fieldToCheck[y][x] == X_POINT) checkCounterHuman++;
-                else if (fieldToCheck[y][x] == O_POINT) checkCounterAI++;
+                if (field[y][x] == X_POINT) checkCounterHuman++;
+                else if (field[y][x] == O_POINT) checkCounterAi++;
             }
             if (checkCounterHuman == figures) {
                 System.out.println("You wins");
                 return true;
-            } else if (checkCounterAI == figures) {
+            } else if (checkCounterAi == figures) {
                 System.out.println("Ai wins");
                 return true;
             }
             checkCounterHuman = 0;
-            checkCounterAI = 0;
+            checkCounterAi = 0;
+        }
+        return false;
+    }
+
+    private static boolean checkStrings() {
+        if (checkCounterHuman != 0 || checkCounterAi != 0) {
+            checkCounterHuman = 0;
+            checkCounterAi = 0;
+        }
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (field[y][x] == X_POINT) checkCounterHuman++;
+                else if (field[y][x] == O_POINT) checkCounterAi++;
+            }
+            if (checkCounterHuman == figures) {
+                System.out.println("You wins");
+                return true;
+            } else if (checkCounterAi == figures) {
+                System.out.println("Ai wins");
+                return true;
+            }
+            checkCounterHuman = 0;
+            checkCounterAi = 0;
         }
         return false;
     }
@@ -122,5 +194,16 @@ public class Lesson4 {
 
     private static boolean placeIsEmpty(int valueY, int valueX) {
         return field[valueY][valueX] == EMPTY_POINT;
+    }
+
+    private static boolean isHoleFieldEmpty() {
+        int i = 0;
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (field[y][x] == EMPTY_POINT) i++;
+            }
+        }
+        if (i != 0) return false;
+        return true;
     }
 }
