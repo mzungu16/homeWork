@@ -75,7 +75,7 @@ public class Lesson4 {
             System.out.println("Input the coordinate please");
             valueX = SCANNER.nextInt() - 1;
             valueY = SCANNER.nextInt() - 1;
-        } while (!placeIsEmpty(valueY, valueX) || !boundIsNorm(valueY, valueX));
+        } while (!placeIsEmpty(valueY, valueX));
 
         field[valueY][valueX] = X_POINT;
     }
@@ -204,7 +204,8 @@ public class Lesson4 {
     }
 
     private static boolean placeIsEmpty(int valueY, int valueX) {
-        return field[valueY][valueX] == EMPTY_POINT;
+        if (boundIsNorm(valueY,valueX)) return field[valueY][valueX] == EMPTY_POINT;
+        return false;
     }
 
     private static boolean isHoleFieldEmpty() {
