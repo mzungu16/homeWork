@@ -27,10 +27,15 @@ public class Lesson4 {
     public static void main(String[] args) {
         initField();
         printField();
-        while (!checkWin()) {
+        while (true) {
             humanTurn();
+            if(checkWin()){
+                printField();
+                break;
+            }
             aiTurn();
             printField();
+            if(checkWin())break;
         }
     }
 
@@ -38,7 +43,7 @@ public class Lesson4 {
         fieldSizeX = SCANNER.nextInt();
         fieldSizeY = SCANNER.nextInt();
         field = new char[fieldSizeY][fieldSizeX];
-        figures = field.length;
+        figures = field.length-1;
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
                 field[y][x] = EMPTY_POINT;
@@ -92,7 +97,10 @@ public class Lesson4 {
         // проверка по противоположной диагонали
         if (checkLastDiagonal()) return true;
         // проверка на ничью
-        if (isHoleFieldEmpty() && checkCounterHuman == 0 && checkCounterAi == 0) return true;
+        if (isHoleFieldEmpty()) {
+            System.out.println("Draw");
+            return true;
+        }
         return false;
     }
 
