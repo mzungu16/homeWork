@@ -40,10 +40,13 @@ public class Lesson4 {
     }
 
     private static void initField() {
-        fieldSizeX = SCANNER.nextInt();
-        fieldSizeY = SCANNER.nextInt();
+        do {
+            System.out.println("Матрица должна быть квадратная!");
+            fieldSizeX = SCANNER.nextInt();
+            fieldSizeY = SCANNER.nextInt();
+        }while (fieldSizeX != fieldSizeY);
         field = new char[fieldSizeY][fieldSizeX];
-        figures = field.length-1;
+        figures = field.length;
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
                 field[y][x] = EMPTY_POINT;
