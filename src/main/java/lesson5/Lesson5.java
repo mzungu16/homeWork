@@ -13,8 +13,6 @@ package lesson5;
 import java.util.Random;
 
 public class Lesson5 {
-    private static Random RANDOM = new Random();
-
     public static void main(String[] args) {
         Employee[] employees = new Employee[5];
         String[] names = {"Ivanov Ivan", "John White", "Tom Bell", "Jack Alan", "Petrov Vladimir"};
