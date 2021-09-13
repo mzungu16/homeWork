@@ -15,15 +15,15 @@ public class Lesson6 {
     static Scanner SCANNER = new Scanner(System.in);
     static int DOGCOUNTER = 0;
     static int CATCOUNTER = 0;
-    static Dog DOG = null;
-    static Cat CAT = null;
+    static Dog dog = null;
+    static Cat cat = null;
 
     public static void main(String[] args) {
         System.out.println("Введите сколько животных будет");
         int sizeOfArray = SCANNER.nextInt();
         Animal[] animals = new Animal[sizeOfArray];
         mainMethod(animals);
-        System.out.printf("Всего было созданно собак - %d, котов - %d", DOG.getCounterDogs(), CAT.getCatCounter());
+        System.out.printf("Всего было созданно собак - %d, котов - %d", dog.getCounterDogs(), cat.getCatCounter());
     }
 
     private static void mainMethod(Animal[] animals) {
@@ -35,15 +35,15 @@ public class Lesson6 {
             inputSwimLength = SCANNER.nextInt();
             inputRunLength = SCANNER.nextInt();
             if (inputTypeOfAnimal.equals(TYPEOFANIMALS[0])) {
-                DOG = new Dog(TYPEOFANIMALS[0], inputSwimLength, inputRunLength);
-                animals[i] = DOG;
+                dog = new Dog(TYPEOFANIMALS[0], inputSwimLength, inputRunLength);
+                animals[i] = dog;
                 DOGCOUNTER++;
-                DOG.setCounterDogs(DOGCOUNTER);
+                dog.setCounterDogs(DOGCOUNTER);
             } else {
-                CAT = new Cat(TYPEOFANIMALS[1], inputSwimLength, inputRunLength);
-                animals[i] = CAT;
+                cat = new Cat(TYPEOFANIMALS[1], inputSwimLength, inputRunLength);
+                animals[i] = cat;
                 CATCOUNTER++;
-                CAT.setCatCounter(CATCOUNTER);
+                cat.setCatCounter(CATCOUNTER);
             }
             animals[i].animalSwim(inputSwimLength);
             animals[i].animalRun(inputRunLength);
