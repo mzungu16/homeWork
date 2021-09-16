@@ -22,6 +22,10 @@ public class Lesson7 {
                 new Cat("John", 8),
                 new Cat("Tom", 12)
         };
+        mainFunction(cats);
+    }
+
+    private static void mainFunction(Cat[] cats) {
         int restFoodInBowl = bowl.getBowl();
         for (Cat cat : cats) {
             if (cat.getSatiety() > bowl.getBowl()) {
@@ -32,14 +36,14 @@ public class Lesson7 {
                     bowl.fillBowl(cat.getSatiety(), restFoodInBowl);
                     System.out.printf("Миска была заполнена на %d\n",cat.getSatiety()-restFoodInBowl);
                 }else{
-                    System.out.printf("%s не будет кушать так как в миске мало еды! И его сытость - %b\n", cat.getName(), cat.isInitialSatiety());
+                    System.out.printf("%s не будет кушать так как в миске мало еды! И его сытость - %b\n", cat.getName(), cat.isNotHungry());
                     break;
                 }
             }
             restFoodInBowl = cat.eat(bowl.getBowl());
             bowl.setBowl(restFoodInBowl);
-            cat.setInitialSatiety(true);
-            System.out.printf("%s покушал. Остаток еды в миске - %d. И его сытость теперь - %b\n", cat.getName(), bowl.getBowl(),cat.isInitialSatiety());
+            cat.setNotHungry(true);
+            System.out.printf("%s покушал. Остаток еды в миске - %d. И его сытость теперь - %b\n", cat.getName(), bowl.getBowl(),cat.isNotHungry());
         }
     }
 }

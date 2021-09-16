@@ -3,7 +3,7 @@ package lesson7;
 public class Cat {
     private String name;
     private int satiety;
-    private boolean initialSatiety = false;
+    private boolean notHungry = false;
 
     public Cat(String name, int satiety) {
         this.name = name;
@@ -14,12 +14,12 @@ public class Cat {
         return foodInBowl - satiety;
     }
 
-    public boolean isInitialSatiety() {
-        return initialSatiety;
+    public boolean isNotHungry() {
+        return notHungry;
     }
 
-    public void setInitialSatiety(boolean initialSatiety) {
-        this.initialSatiety = initialSatiety;
+    public void setNotHungry(boolean notHungry) {
+        this.notHungry = notHungry;
     }
 
     public String getName() {
