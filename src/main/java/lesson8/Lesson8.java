@@ -16,18 +16,36 @@ public class Lesson8 {
 
     public static void main(String[] args) {
         firstTaskWithInterfaces();
-        secondTask(WALL, TREADMILL);
+        secondTask();
+        thirdTas();
     }
 
-    private static void secondTask(Wall wall, Treadmill treadmill) {
+    private static void thirdTas() {
+        Object[] participants = {
+                new Human("Tom"),
+                new Cat("Barsik"),
+                new Robot("AV-0912")
+        };
+        for (Object participant : participants) {
+            if (participant instanceof Human) {
+                ((Human) participant).throughTheObstacle(WALL, TREADMILL);
+            } else if (participant instanceof Cat) {
+                ((Cat) participant).throughTheObstacleCat(WALL, TREADMILL);
+            } else if (participant instanceof Robot) {
+                ((Robot) participant).throughTheObstacleRobot(WALL, TREADMILL);
+            }
+        }
+    }
+
+    private static void secondTask() {
         Object[] objects = {
                 new Human(),
                 new Cat(),
                 new Robot()
         };
         for (Object object : objects) {
-            wall.doWithWall(object);
-            treadmill.run();
+            WALL.doWithWall(object);
+            TREADMILL.doWithTreadmill();
         }
     }
 
