@@ -7,9 +7,9 @@ public class Wall implements Checkable {
 
     @Override
     public boolean check(Participate participate) {
-        int hight = 5;
-        if (hight > participate.getBoundOfJump()) {
-
+        int height = 5;
+        if (height > participate.getBoundOfJump()) {
+            participate.setContinue(false);
             return false;
         }
         return true;

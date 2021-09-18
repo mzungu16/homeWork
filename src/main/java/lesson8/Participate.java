@@ -17,6 +17,14 @@ public class Participate implements AbleToDo {
         this.boundOfRun = boundOfRun;
     }
 
+    public void setContinue(boolean aContinue) {
+        isContinue = aContinue;
+    }
+
+    public boolean isContinue() {
+        return isContinue;
+    }
+
     public String getNameOfParticipate() {
         return nameOfParticipate;
     }
