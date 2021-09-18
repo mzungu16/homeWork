@@ -10,54 +10,42 @@ package lesson8;
  * Если участник не смог пройти одно из препятствий, то дальше по списку он препятствий не идет.
  * */
 
+import java.awt.*;
+
 public class Lesson8 {
-    static Wall WALL = new Wall();
-    static Treadmill TREADMILL = new Treadmill();
-
     public static void main(String[] args) {
-        firstTaskWithInterfaces();
-        secondTask();
-        thirdTas();
-    }
-
-    private static void thirdTas() {
-        Object[] participants = {
-                new Human("Tom"),
-                new Cat("Barsik"),
-                new Robot("AV-0912")
+//        firstAndSecondTask();
+        Participate[] participates = {
+                new Human("John", 3, 200),
+                new Cat("Tom", 10, 550),
+                new Robot("AV-124", 0, 1000)
         };
-        for (Object participant : participants) {
-            if (participant instanceof Human) {
-                ((Human) participant).throughTheObstacle(WALL, TREADMILL);
-            } else if (participant instanceof Cat) {
-                ((Cat) participant).throughTheObstacleCat(WALL, TREADMILL);
-            } else if (participant instanceof Robot) {
-                ((Robot) participant).throughTheObstacleRobot(WALL, TREADMILL);
+
+
+        Checkable[] obstacles = {
+                new Wall(),
+                new Treadmill(),
+                new Wall(),
+                new Wall()
+        };
+        for (Participate participate : participates) {
+            for (Checkable o : obstacles) {
+                if(o.check(participate)){
+                    System.out.printf("%s do %s\n",participate.getNameOfParticipate(),o.returnNameOfObstacle());
+                }
             }
         }
     }
 
-    private static void secondTask() {
-        Object[] objects = {
-                new Human(),
-                new Cat(),
-                new Robot()
+    private static void firstAndSecondTask() {
+        Participate[] participates = {
+                new Human("Human"),
+                new Cat("Cat"),
+                new Robot("Robot")
         };
-        for (Object object : objects) {
-            WALL.doWithWall(object);
-            TREADMILL.doWithTreadmill();
+        for (Participate participate : participates) {
+            participate.jump();
+            participate.run();
         }
-    }
-
-    private static void firstTaskWithInterfaces() {
-        Human human = new Human();
-        human.run();
-        human.jump();
-        Cat cat = new Cat();
-        cat.run();
-        cat.jump();
-        Robot robot = new Robot();
-        robot.run();
-        robot.jump();
     }
 }

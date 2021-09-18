@@ -1,21 +1,22 @@
 package lesson8;
 
-public class Wall {
-
+public class Wall implements Checkable {
     public Wall() {
+
     }
 
-    public void obstaclePassingMethodInWall(String objectsName) {
-        System.out.printf("%s пройди препятствие - 'Стена'\n",objectsName);
-    }
+    @Override
+    public boolean check(Participate participate) {
+        int hight = 5;
+        if (hight > participate.getBoundOfJump()) {
 
-    public void doWithWall(Object object) {
-        if (object instanceof Human) {
-            System.out.println("Human jump");
-        } else if (object instanceof Cat) {
-            System.out.println("Cat jump");
-        } else {
-            System.out.println("Robot can't jump :(");
+            return false;
         }
+        return true;
+    }
+
+    @Override
+    public String returnNameOfObstacle() {
+        return "Wall";
     }
 }

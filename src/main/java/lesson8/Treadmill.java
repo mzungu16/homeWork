@@ -1,16 +1,20 @@
 package lesson8;
 
-public class Treadmill {
-
+public class Treadmill implements Checkable {
     public Treadmill() {
     }
 
-    public void obstaclePassingMethodInTreadmill(String objectsName) {
-        System.out.printf("%s пройди препятствие 'Беговая дорожка'\n",objectsName);
+    @Override
+    public boolean check(Participate participate) {
+        int length = 535;
+        if (length > participate.getBoundOfRun()) {
+            return false;
+        }
+        return true;
     }
 
-    public void doWithTreadmill() {
-        System.out.println("Run on treadmill");
+    @Override
+    public String returnNameOfObstacle() {
+        return "Treadmill";
     }
-
 }

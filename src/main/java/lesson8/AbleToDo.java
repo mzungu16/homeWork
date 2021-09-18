@@ -2,8 +2,8 @@ package lesson8;
 
 public interface AbleToDo {
 
-    public void run();
+    void run();
 
-    public void jump();
+    void jump();
 
 }
