@@ -14,14 +14,17 @@ import java.awt.*;
 
 public class Lesson8 {
     public static void main(String[] args) {
-//        firstAndSecondTask();
+        firstAndSecondTask();
+        System.out.println();
+        thirdAndFourthTasks();
+    }
+
+    private static void thirdAndFourthTasks() {
         Participate[] participates = {
-                new Human("John", 3, 200),
+                new Human("John", 6, 565),
                 new Cat("Tom", 10, 500),
                 new Robot("AV-124", 0, 1000),
-                new Human("Ghbkaf", 6, 1000),
-                new Robot("safasfaff", 4, 1000),
-                new Cat("AVAFAFAF", 8, 1000),
+                new Human("Josh", 6, 1000),
                 new Robot("AV-12afafsaf4", 0, 1000)
         };
 
@@ -34,8 +37,8 @@ public class Lesson8 {
         };
         for (Participate participate : participates) {
             for (Checkable o : obstacles) {
-                if(o.check(participate) && participate.isContinue()){
-                    System.out.printf("%s do %s\n",participate.getNameOfParticipate(),o.returnNameOfObstacle());
+                if (o.check(participate) && participate.isContinue()) {
+                    System.out.printf("%s do %s\n", participate.getNameOfParticipate(), o.returnNameOfObstacle());
                 }
             }
         }
