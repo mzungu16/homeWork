@@ -31,12 +31,8 @@ public class Task {
         addOrangesInBoxAsSingleObject(orangeBox);
         Box<Orange> orangeBox1 = new Box<>();
         addOrangesInBoxAsList(random, orangeBox1);
-        System.out.println(appleBox.compareByWeight(orangeBox));
-        System.out.println(appleBox.getList());
-        System.out.println(appleBox1.getList());
-        appleBox.copyAndEmptyBox(appleBox1);
-        System.out.println(appleBox.getList());
-        System.out.println(appleBox1.getList());
+        System.out.println(appleBox.compareByWeight(orangeBox));//сравнение коробок
+        appleBox.copyAndEmptyBox(appleBox1);//пересыпание фруктов
     }
 
     private static void addOrangesInBoxAsList(Random random, Box<Orange> orangeBox1) {
