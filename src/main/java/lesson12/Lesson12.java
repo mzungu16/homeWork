@@ -1,9 +1,11 @@
 package lesson12;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Lesson12 {
-    static final int SIZE_OF_ARRAY = 100_000;
+    static final int SIZE_OF_ARRAY = 1_000_000;
 
     public static void main(String[] args) {
         calculateValueWithOutThreads();
