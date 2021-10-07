@@ -11,7 +11,6 @@ public class Lesson12 {
         calculateValueWithOutThreads();
         calculateValueWithThreads();
     }
-
     private static void calculateValueWithThreads() {
         float[] myArray1 = new float[SIZE_OF_ARRAY];
         Arrays.fill(myArray1, 1f);
