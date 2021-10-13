@@ -20,7 +20,7 @@ public class Lesson12 {
         float[] myArray3 = new float[SIZE_OF_ARRAY / 2];
         System.arraycopy(myArray1, SIZE_OF_ARRAY / 2, myArray3, 0, SIZE_OF_ARRAY / 2);
         new Thread(() -> calculate(myArray2)).start();
-        new Thread(() -> calculate(myArray3)).start();
+        new Thread(() -> calculate(myArray3)).start();//Надо вызвать join чтобы поток дождался конца выполнения предыдущего потока
         System.arraycopy(myArray2, 0, myArray1, 0, myArray2.length);
         System.arraycopy(myArray3, 0, myArray1, myArray2.length, myArray3.length);
         System.out.println(System.currentTimeMillis() - timeOfBegin1);
