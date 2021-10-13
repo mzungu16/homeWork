@@ -7,7 +7,6 @@ import java.util.concurrent.CountDownLatch;
 public class Car implements Runnable {
     private static int CARS_COUNT;
     private static CountDownLatch countDownLatch = new CountDownLatch(Lesson13.CARS_COUNT);
-    private static int WINNER;
 
     static {
         CARS_COUNT = 0;
@@ -16,17 +15,6 @@ public class Car implements Runnable {
     private Race race;
     private int speed;
     private String name;
-    private Road road;
-    private ArrayList<Long> longArrayList = new ArrayList<>(Lesson13.CARS_COUNT);
-    private ArrayList<String> stringArrayList = new ArrayList<>(Lesson13.CARS_COUNT);
-
-    public ArrayList<Long> getLongArrayList() {
-        return longArrayList;
-    }
-
-    public static int getWINNER() {
-        return WINNER;
-    }
 
     public String getName() {
         return name;
@@ -58,7 +46,6 @@ public class Car implements Runnable {
         }
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
-            Road.getFinishMap();
         }
     }
 }
