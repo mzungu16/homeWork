@@ -1,6 +1,5 @@
-package lesson13;
+package lesson13_new;
 
-import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 
 public class Car implements Runnable {
